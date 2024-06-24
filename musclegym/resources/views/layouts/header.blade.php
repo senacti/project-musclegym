@@ -9,13 +9,22 @@
     <nav class="navbar">
         <a href="{{route('principal')}}">Inicio</a>
         <!--Home-->
-        <a href="{{route('servicios.view')}}">Servicios</a>
+        @auth
+            @if(Auth::user()->rol == 2)
+                <a href="{{route('servicios.view')}}">Servicios</a>
+            @endif
+        @endauth
+        @guest
+            <a href="{{route('servicios.view')}}">Servicios</a>
+        @endguest
         <!--services-->
         @guest
             <a href="error404.html">Contacto</a>
         @endguest
         @auth
-            <a href="{{ route('reportes.view') }}">Reportes</a>
+            @if (Auth::user()->rol == 1)
+                <a href="{{ route('reportes.view') }}">Reportes</a>
+            @endif
         @endauth
         <!--contact-->
         @guest
@@ -44,13 +53,13 @@
                 {{ Auth::user()->name }}
             </button>
             <div class="dropdown-content">
+                <a href="{{route('profile.edit')}}">Perfil</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                         Cerrar Sesion
                     </a>
                 </form>
-              <a href="{{route('profile.edit')}}">Perfil</a>
             </div>
           </div>
         @endauth

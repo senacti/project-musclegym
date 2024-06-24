@@ -13,15 +13,33 @@
                             <h4 style="text-align: center; font-size: 50px">{{$rutina->Descripcion}}</h4>
                             @if ($rutina->Descripcion === "Pierna")
                                 <img src="{{ asset('storage/rutinas/pierna.png') }}" style="width: 100px; height: 100px;" />
+                            @elseif ($rutina->Descripcion === 'Espalda')
+                                <img src="{{ asset('storage/rutinas/espalda.png') }}" style="width: 100px; height: 100px;" />
                             @else
-                            <img src="{{ asset('storage/rutinas/brazo.png') }}" style="width: 100px; height: 100px;" />
+                                <img src="{{ asset('storage/rutinas/brazo.png') }}" style="width: 100px; height: 100px;" />
                             @endif
                         </div>
                     
                     @endforeach
                 </div>
             @else
-                <p>Administrador</p>
+                <div style="display: flex; gap: 20px; width: 75vw; overflow: auto;">
+                    @foreach ($rutinasAdministrador as $rutina)
+        
+                        <div style="width: 200px; height: 230px; background-color: tomato; display: flex; flex-direction: column; align-items: center; border-radius: 20px">
+                            <h4 style="text-align: center; font-size: 50px">{{$rutina->Descripcion}}</h4>
+                            @if ($rutina->Descripcion === "Pierna")
+                                <img src="{{ asset('storage/rutinas/pierna.png') }}" style="width: 100px; height: 100px;" />
+                                @elseif ($rutina->Descripcion === 'Espalda')
+                                <img src="{{ asset('storage/rutinas/espalda.png') }}" style="width: 100px; height: 100px;" />
+                            @else
+                            <img src="{{ asset('storage/rutinas/brazo.png') }}" style="width: 100px; height: 100px;" />
+                            @endif
+                            <p>{{ $rutina->ID_Cliente }}</p>
+                        </div>
+                    
+                    @endforeach
+                </div>
             @endif
         </div>
     </div>

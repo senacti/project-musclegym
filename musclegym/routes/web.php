@@ -48,12 +48,22 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/tienda', [TiendaController::class, 'mostrarTienda'])->name('tienda.show');
     Route::get('/tienda/membresias', [TiendaController::class, 'mostrarMembresias'])->name('membresias.show');
+    
     Route::get('/tienda/productos', [TiendaController::class, 'mostrarProductos'])->name('productos.show');
+    Route::post('/tienda/productos', [TiendaController::class, 'guardarProductos'])->name('productos.store');
+    Route::delete('/tienda/productos', [TiendaController::class, 'eliminarProductos'])->name('delete.productos');
+    Route::post('/comprar/productos/{id}', [TiendaController::class, 'comprarProducto'])->name('comprar.actualizar');
+    
     Route::post('/tienda/membresias/{id}', [TiendaController::class, 'guardarMembresia'])->name('membresias.store');
     Route::put('/tienda/membresias/{id}', [TiendaController::class, 'actualizarFechaVenta'])->name('actualizar.fecha.venta');
     Route::delete('/tienda/membresias/{id}', [TiendaController::class, 'eliminarVenta'])->name('eliminar.venta');
+    
+});
+
+Route::middleware(['auth', 'administrador'])->group(function(){
     Route::get('/reportes', [TiendaController::class, 'reportesView'])->name('reportes.view');
     Route::get('/reportes/descargar', [TiendaController::class, 'reporteDescarga'])->name('descargar.repoorte');
+    Route::get('/reportes/descargar/productos', [TiendaController::class, 'reporteDescargaProductos'])->name('descargar.repoorte.productos');
 });
 
 

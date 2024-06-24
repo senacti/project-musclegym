@@ -59,6 +59,7 @@ class TiendaController extends Controller
     }
 
     public function actualizarFechaVenta($id){
+        date_default_timezone_set('America/Bogota');
         try {
             $membresia = DB::table('ventas')->where('ID_Venta', $id)->value('Fecha');
             if($membresia == Carbon::now()->format('Y-m-d')){
@@ -98,7 +99,99 @@ class TiendaController extends Controller
             $ventas = DB::table('ventas')->whereDate('Fecha', '>=', $inicio)->whereDate('Fecha', '<=', $fin)->get();
 
             $pdf = Pdf::loadView('reportes.reporteGenerado', compact('ventas'));
-            return $pdf->download('reporteLibros.pdf');
+            return $pdf->download('reporteVentas.pdf');
+        } catch (\Exception $e) {
+            logs($e->getMessage());
+            return back()->with('mensajeReporte', 'Ocurrio un error');
+        }
+    }
+
+    public function mostrarProductos(){
+        $datos = [
+            'productos' => DB::table('productos')->get()
+        ];
+        return view('tienda/productos', $datos);
+    }
+
+    public function guardarProductos(Request $request){
+        try {
+            $archivo = $request->file('file');
+            $request->file('file')->store('public/productos');
+
+            $id = DB::table('productos')->orderBy('ID_Producto', 'desc')->first();
+
+            DB::table('productos')->insert([
+                'ID_Producto' => intval($id->ID_Producto) + 1,
+                'Nombre' => $request->nombre,
+                'Descripcion' => $request->file('file')->store('public/productos'),
+                'Precio' => $request->precio,
+                'Cantidad_disponible' => $request->cantidad_disponible,
+                'Proveedor' => $request->proveedor,
+                'Estado' => 1
+            ]);
+
+
+            return back()->with('productosMensaje', 'Se guardo el producto');
+        } catch (\Exception $e) {
+            logs($e->getMessage());
+            // return back()->with('productosMensaje', 'Ocurrio un error');
+            return back()->with('productosMensaje', $e->getMessage());
+        }
+    }
+
+    public function eliminarProductos(Request $request){
+        try {
+            $validacion = DB::table('productos')->where('ID_Producto', $request->radioId)->exists();
+            if($validacion){
+                DB::table('productos')->where('ID_Producto', $request->radioId)->delete();
+                return back()->with('productosMensaje', 'Se elimino el producto');
+            }
+            else{
+                return back()->with('productosMensaje', 'No se encontro el producto');
+            }
+            
+        } catch (\Exception $e) {
+            logs($e->getMessage());
+            return back()->with('productosMensaje', 'Ocurrio un error');
+        }
+    }
+
+    public function comprarProducto($id){
+        try {
+            $cantidad = DB::table('productos')->where('ID_Producto', $id)->value('Cantidad_disponible');
+            if($cantidad <= 0){
+                return back()->with('productosMensaje', 'No quedan productos en Stock');
+            }
+            else{
+                DB::table('productos')->where('ID_Producto', $id)->update([
+                    'Cantidad_disponible' => intval($cantidad) - 1
+                ]);
+
+                $idVenta = DB::table('ventas_productos')->orderBy('ID_Venta_producto', 'desc')->first();
+                $productoValor = DB::table('productos')->where('ID_Producto', $id)->value('Precio');
+                DB::table('ventas_productos')->insert([
+                    'ID_Venta_producto' => intval($idVenta->ID_Venta_producto) + 1,
+                    'ID_Venta' => 102,
+                    'ID_Producto' => $id,
+                    'Cantidad' => 1,
+                    'Subtotal' => $productoValor,
+                    'Estado' => 1
+                ]);
+                return back()->with('productosMensaje', 'Se registro correctamente la compra');
+            }
+        } catch (\Exception $e) {
+            logs($e->getMessage());
+            return back()->with('productosMensaje', 'Ocurrio un error');
+        }
+    }
+
+
+    public function reporteDescargaProductos(Request $request){
+        try {
+            $ventas = DB::table('ventas_productos')->join('productos', 'productos.ID_Producto', '=', 'ventas_productos.ID_Producto')->get();
+
+            $pdf = Pdf::loadView('reportes.reporteProductos', compact('ventas'));
+            return $pdf->download('reporteVentasProductos.pdf');
         } catch (\Exception $e) {
             logs($e->getMessage());
             return back()->with('mensajeReporte', 'Ocurrio un error');

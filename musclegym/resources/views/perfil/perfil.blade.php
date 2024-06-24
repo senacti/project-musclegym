@@ -12,7 +12,11 @@
                                 <h2>Datos del Usuario</h2>
                                 <b>Nombre:</b> {{Auth::user()->name}} <br>
                                 <b>Correo:</b> {{Auth::user()->email}} <br>
-                                <b>Rol:</b> Administrador <br>
+                                @if (Auth::user()->rol == 1)
+                                    <b>Rol:</b> Administrador <br>                                    
+                                @else
+                                    <b>Rol:</b> Cliente <br>
+                                @endif
 
                             </div>
                         </div>
