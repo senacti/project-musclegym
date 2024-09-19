@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEVEL GYM - Planes</title>
+    <link rel="stylesheet" href="{% static 'css/planes.css' %}">
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="{% url 'index' %}"><img src="{% static 'images/icono.jfif' %}" alt="" height="50" width="100"></a>
+            </div>
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                <li><a href="{% url 'planes' %}">Planes</a></li>
+                <li><a href="{% url 'salud' %}">Salud</a></li> 
+                
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="plans-container">
+            <h1>Planes del Gimnasio</h1>
+            
+            <div class="plans-category">
+                <h2>Planes de Membresía</h2>
+                <div class="plans-group membership-plans">
+                    {% if planes %}
+                        <ul>
+                            {% for plan in planes %}
+                                <li>
+                                    <h3>{{ plan.nombre }}</h3>
+                                    <p>Descripción: {{ plan.descripcion }}</p>
+                                    <p>Precio: ${{ plan.precio }}</p>
+                                    <p>Duración: {{ plan.duracion }} días</p>
+                                    <div class="buy-button-container">
+                                        <a href="{% url 'adquirir_plan' plan.id %}" class="buy-button">Adquirir</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No hay planes disponibles.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="plans-category">
+                <h2>Planes Nutricionales</h2>
+                <div class="plans-group nutritional-plans">
+                    {% if planes_nutricionales %}
+                        <ul>
+                            {% for plan_nutricional in planes_nutricionales %}
+                                <li>
+                                    <h3>{{ plan_nutricional.nombre }}</h3>
+                                    <p>Descripción: {{ plan_nutricional.descripcion }}</p>
+                                    <p>Precio: ${{ plan_nutricional.precio }}</p>
+                                    <p>Duración: {{ plan_nutricional.duracion }} días</p>
+                                    <div class="buy-button-container">
+                                        <a href="{% url 'adquirir_plan_nutricional' plan_nutricional.id %}" class="buy-button">Adquirir</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No hay planes nutricionales disponibles.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LEVEL GYM. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

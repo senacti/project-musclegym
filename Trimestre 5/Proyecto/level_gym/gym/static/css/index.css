@@ -1,0 +1,179 @@
+/* General Body Styling */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/index.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Fixes the background image in place */
+    height: 100vh; /* Ensures that the body covers the full viewport height */
+    overflow-x: hidden; /* Prevents horizontal overflow */
+}
+
+/* Header Styling */
+header {
+    background: rgba(34, 34, 34, 0.8);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    max-height: 60px; /* Adjust this value based on your logo size */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Main Content Styling */
+main {
+    padding: 100px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* General Section Styling */
+section {
+    background: rgba(51, 51, 51, 0.8);
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 40px; /* Increased margin for spacing between sections */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Main Heading Styling */
+section h1, section h2 {
+    color: #ff6600;
+}
+
+section h1 {
+    font-size: 2.5em; /* Slightly larger font size for main heading */
+    margin-bottom: 20px;
+}
+
+section h2 {
+    font-size: 2em; /* Slightly larger font size for subheadings */
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.button {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px; /* Increased padding for better button appearance */
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px; /* Adjusted font size for better readability */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 10px; /* Added margin for spacing between buttons */
+}
+
+.button:hover {
+    background-color: #e65c00;
+    transform: scale(1.05);
+}
+
+/* Contact Section Styling */
+section.contact {
+    margin-top: 60px; /* Increased top margin to push it down */
+}
+
+section.contact p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Social Media Icons Styling */
+.social-media {
+    margin-top: 20px; /* Increased margin for spacing */
+}
+
+.social-media a {
+    margin-right: 15px;
+}
+
+.social-media img {
+    vertical-align: middle;
+    width: 40px; /* Increased size for better visibility */
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-media img:hover {
+    transform: scale(1.1);
+}
+
+/* Services Section Styling */
+section.services {
+    margin-top: 60px; /* Added top margin to ensure space from previous sections */
+}
+
+section.services ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+section.services ul li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Footer Styling */
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+

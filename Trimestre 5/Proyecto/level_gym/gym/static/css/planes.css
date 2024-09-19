@@ -1,0 +1,157 @@
+/* General Body Styling */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/index.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh; /* Ensures the body covers the full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+header {
+    background: rgba(34, 34, 34, 0.8);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    max-height: 60px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Main Content Styling */
+main {
+    padding: 80px 20px 60px; /* Top padding should be greater than header height */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1; /* Allows main content to take available space */
+    text-align: center;
+}
+
+/* Plans Container Styling */
+.plans-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+/* Grid layout for plans */
+.plans-category {
+    margin-bottom: 40px;
+}
+
+.plans-category h2 {
+    margin-top: 0;
+    color: #ff6600; /* Add color for category headings */
+}
+
+.plans-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between items */
+    justify-content: center; /* Center items in the grid */
+}
+
+/* Styling for individual plans */
+.plans-group li {
+    background: rgba(51, 51, 51, 0.8); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ff6600; /* Orange border */
+    box-sizing: border-box;
+    text-align: left;
+    position: relative;
+    overflow: hidden; /* Ensures button does not overflow */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+}
+
+.plans-group h3 {
+    margin-top: 0;
+}
+
+.buy-button-container {
+    text-align: center; /* Center the button in its container */
+    margin-top: auto; /* Push button to the bottom of the container */
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ff6600;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.buy-button:hover {
+    background-color: #e65c00;
+    transform: scale(1.05);
+}
+
+/* Footer Styling */
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    width: 100%;
+}

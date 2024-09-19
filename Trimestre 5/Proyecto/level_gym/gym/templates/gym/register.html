@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEVEL GYM - Registrarse</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <a href="{% url 'index' %}"><img src="{% static 'images/icono.jfif' %}" alt="Icono" class="logo"></a>
+                <ul>
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                    <li><a href="{% url 'planes' %}">Planes</a></li>
+                    <li><a href="{% url 'salud' %}">Salud</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="form-container">
+                <h1>Registro de Usuario</h1>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Nombre de usuario:</label>
+                        {{ form.username }}
+                        <div class="form-help">Requerido. Máximo 150 caracteres.</div>
+                        {% if form.username.errors %}
+                            <div class="form-errors">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Nombre:</label>
+                        {{ form.first_name }}
+                        <div class="form-help">Requerido. 30 caracteres como máximo.</div>
+                        {% if form.first_name.errors %}
+                            <div class="form-errors">{{ form.first_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Apellido:</label>
+                        {{ form.last_name }}
+                        <div class="form-help">Requerido. 30 caracteres como máximo.</div>
+                        {% if form.last_name.errors %}
+                            <div class="form-errors">{{ form.last_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico:</label>
+                        {{ form.email }}
+                        <div class="form-help">Requerido. Introduzca una dirección de correo electrónico válida.</div>
+                        {% if form.email.errors %}
+                            <div class="form-errors">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Contraseña:</label>
+                        {{ form.password1 }}
+                        <div class="form-help">Su contraseña no puede asemejarse tanto a su otra información personal. Su contraseña debe contener por lo menos 8 caracteres. Su contraseña no puede ser una clave utilizada comúnmente. Su contraseña no puede ser completamente numérica.</div>
+                        {% if form.password1.errors %}
+                            <div class="form-errors">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Confirmar contraseña:</label>
+                        {{ form.password2 }}
+                        <div class="form-help">Para verificar, ingrese la misma contraseña anterior.</div>
+                        {% if form.password2.errors %}
+                            <div class="form-errors">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="button">Registrarse</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 LEVEL GYM. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>

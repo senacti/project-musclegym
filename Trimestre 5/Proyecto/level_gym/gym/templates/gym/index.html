@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEVEL GYM - Inicio</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="{% url 'index' %}"><img src="{% static 'images/icono.jfif' %}" alt="LEVEL GYM Logo" class="logo"></a>
+            </div>
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                <li><a href="{% url 'planes' %}">Planes</a></li>
+                <li><a href="{% url 'salud' %}">Salud</a></li> 
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Bienvenido a LEVEL GYM</h1>
+            <p>¡Tu gimnasio de confianza para un estilo de vida saludable y activo!</p>
+            <a href="{% url 'tienda' %}" class="button">Explora nuestra tienda</a>
+            <a href="{% url 'planes' %}" class="button">Consulta nuestros planes</a>
+            <a href="{% url 'salud' %}" class="button">Más sobre Salud</a> 
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LEVEL GYM. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

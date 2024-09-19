@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud - LEVEL GYM</title>
+    <link rel="stylesheet" href="{% static 'css/salud.css' %}">
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="{% url 'index' %}"><img src="{% static 'images/icono.jfif' %}" alt="LEVEL GYM Logo" class="logo"></a>
+            </div>
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                <li><a href="{% url 'planes' %}">Planes</a></li>
+                <li><a href="{% url 'salud' %}">Salud</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Carrusel de Imágenes -->
+        <section class="carousel-section">
+            <h2>Galería de Ejercicios</h2>
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'images/cardio.jpg' %}" class="d-block w-100" alt="Ejercicio 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Actividad fisica</h5>
+                            <p>Cardio</p>x
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/ejercicio.jpg' %}" class="d-block w-100" alt="Ejercicio 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Entrenamiento de Fuerza</h5>
+                            <p>Descripción del ejercicio 2.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/comida.jpg' %}" class="d-block w-100" alt="Ejercicio 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Cardio y Resistencia</h5>
+                            <p>Descripción del ejercicio 3.</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </section>
+    
+        <section>
+            <h1>Información sobre Salud</h1>
+            <p>La salud es un estado de completo bienestar físico, mental y social. Es importante mantener una dieta equilibrada, hacer ejercicio regularmente y cuidar nuestra salud mental.</p>
+            <p>La salud física puede verse afectada por varios factores, incluyendo la genética, el estilo de vida y el entorno. Mantener un estilo de vida saludable puede ayudar a prevenir enfermedades y mejorar la calidad de vida.</p>
+            <p>Recuerda que la salud mental también es crucial para el bienestar general. Tomar tiempo para relajarse, practicar la meditación y mantener relaciones sociales saludables puede tener un impacto positivo en tu salud mental.</p>
+        </section>
+    
+        <section>
+            <h2>Ejercicio y Gimnasio</h2>
+            <p>El ejercicio regular es esencial para una vida saludable. El gimnasio puede ofrecerte una variedad de ejercicios para mejorar tu fuerza, resistencia y flexibilidad. Aquí hay algunos consejos para empezar:</p>
+            <ul>
+                <li>Comienza con ejercicios básicos y aumenta la intensidad gradualmente.</li>
+                <li>Varía tu rutina para trabajar diferentes grupos musculares.</li>
+                <li>Escucha a tu cuerpo y descansa cuando sea necesario.</li>
+                <li>Consulta con un entrenador personal si necesitas ayuda para crear una rutina adecuada.</li>
+                <li>Recuerda hidratarte bien antes, durante y después del ejercicio.</li>
+            </ul>
+            <p>Además de los ejercicios físicos, el descanso y la nutrición son fundamentales para obtener los mejores resultados del ejercicio.</p>
+        </section>
+    </main>
+    
+
+    <footer>
+        <p>&copy; 2024 LEVEL GYM. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Incluyendo Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
